@@ -2,6 +2,8 @@
 
 3D visualization of COVID-19.
 
+![demo](https://i.imgur.com/NWkvWu3.png)
+
 ## Installing
 
 1. Install dependencies
