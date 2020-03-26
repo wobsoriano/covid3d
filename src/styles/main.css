@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  overflow: hidden;
+}
+
+.top-info-container {
+  z-index: 1;
+  top: 20px;
+  position: absolute;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.bottom-info-container {
+  z-index: 1;
+  bottom: 20px;
+  position: absolute;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 35px;
+  color: #e6f1ff;
+}
+
+.title-desc {
+  margin-top: 5px;
+  color: #ccd6f6;
+}
+
+#infected {
+  color: goldenrod;
+}
+
+#deaths {
+  color: #ff4848;
+}
+
+#recovered {
+  color: #1ae021;
+}

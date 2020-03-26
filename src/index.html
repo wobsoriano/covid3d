@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div id="globeViz"></div>
+    <div class="top-info-container">
+      <div class="title">COVID-19</div>
+      <div class="title-desc">
+        Hover on a country or territory to see cases, deaths, and recoveries.
+      </div>
+    </div>
+
+    <div class="bottom-info-container">
+      <div style="font-size: 14px; color: #ccd6f6;">Total Counts</div>
+      <div style="color: #e6f1ff;">
+        INFECTED: <span id="infected">0</span> • DEATHS:
+        <span id="deaths">0</span> • RECOVERED: <span id="recovered"></span>
+      </div>
+      <div style="margin-top: 5px;">
+        <a href="#" style="color: #64ffda; text-decoration: none;"
+          >More Information</a
+        >
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
