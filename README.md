@@ -34,5 +34,5 @@ Licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- Inspired from https://covidvisualizer.com
+- Inspired by https://covidvisualizer.com
 - Hat tip to anyone whos module was used
