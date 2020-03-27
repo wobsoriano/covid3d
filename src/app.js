@@ -1,15 +1,25 @@
 import Globe from 'globe.gl';
 import { CountUp } from 'countup.js';
+import * as d3 from 'd3';
+
+// Globe container
 const globeContainer = document.getElementById('globeViz');
+// Globe image url
 const globeImageUrl =
-  '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg';
+  '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg';
+// Background image url
 const backgroundImageUrl =
   '//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png';
-let world;
-
+// Geojson url
 const geojsonUrl =
   'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson';
+// COVID-19 cases api
 const apiUrl = 'https://corona.lmao.ninja/countries?sort=country';
+
+const colorScale = d3.scaleSequentialPow(d3.interpolateOrRd).exponent(1/4)
+const getVal = feat => feat.covid.cases;
+
+let world;
 
 init();
 
@@ -17,9 +27,10 @@ function init() {
   world = Globe()(globeContainer)
     .globeImageUrl(globeImageUrl)
     .backgroundImageUrl(backgroundImageUrl)
-    .pointOfView({ altitude: 4.5 }, 5000)
-    .polygonCapColor(feat => 'rgba(200, 0, 0, 0.6)')
+    .polygonAltitude(0.06)
+    .polygonCapColor(feat => colorScale(getVal(feat)))
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
+    .polygonStrokeColor(() => '#111')
     .polygonLabel(
       ({ properties: d, covid: c }) => `
             <div class="card">
@@ -44,11 +55,12 @@ function init() {
               </div>
             </div>
           `
-    );
-
-  // Auto-rotate
-  world.controls().autoRotate = true;
-  world.controls().autoRotateSpeed = 0.1;
+    )
+    .onPolygonHover(hoverD => world
+      .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
+      .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
+    )
+    .polygonsTransitionDuration(300);
 
   getCases();
 }
@@ -76,8 +88,10 @@ async function getCases() {
     }
 
     
+  const maxVal = Math.max(...countriesWithCovid.map(getVal));
+  colorScale.domain([0, maxVal]);
   });
-console.log(countriesWithCovid)
+
   world.polygonsData(countriesWithCovid);
 
   // Show total counts
@@ -92,20 +106,6 @@ console.log(countriesWithCovid)
   const totalRecovered = data.reduce((a, b) => a + b.recovered, 0);
   const recovered = new CountUp('recovered', totalRecovered);
   recovered.start();
-
-  // Do effect
-  setTimeout(
-    () =>
-      world
-        .polygonsTransitionDuration(4000)
-        .polygonAltitude(feat =>
-          Math.max(
-            0.1,
-            Math.sqrt(+feat.properties.POP_EST) * 7e-5
-          )
-        ),
-    3000
-  );
 }
 
 async function request(url) {
@@ -117,3 +117,9 @@ async function request(url) {
     throw e;
   }
 }
+
+// Responsive globe
+window.addEventListener('resize', (event) => {
+  world.width([event.target.innerWidth])
+  world.height([event.target.innerHeight])
+});

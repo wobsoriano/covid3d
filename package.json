@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "countup.js": "^2.0.4",
+    "d3": "^5.15.0",
     "globe.gl": "^2.8.5"
   }
 }
