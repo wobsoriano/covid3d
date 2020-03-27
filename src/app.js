@@ -9,7 +9,7 @@ let world;
 
 const geojsonUrl =
   'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson';
-const apiUrl = 'https://covid2019-api.herokuapp.com/v2/current';
+const apiUrl = 'https://corona.lmao.ninja/countries?sort=country';
 
 init();
 
@@ -17,15 +17,32 @@ function init() {
   world = Globe()(globeContainer)
     .globeImageUrl(globeImageUrl)
     .backgroundImageUrl(backgroundImageUrl)
-    .pointOfView({ altitude: 2.5 }, 5000)
+    .pointOfView({ altitude: 4.5 }, 5000)
     .polygonCapColor(feat => 'rgba(200, 0, 0, 0.6)')
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
     .polygonLabel(
-      ({ properties: d }) => `
-            <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-            Active cases: <i>${d.COVID_ACTIVE_CASES || 0}</i> <br />
-            Deaths: <i>${d.COVID_DEATHS || 0}</i> <br />
-            Recovered: <i>${d.COVID_RECOVERED || 0}</i>
+      ({ properties: d, covid: c }) => `
+            <div class="card">
+              <img class="card-img" src="${c.countryInfo.flag}" alt="flag" />
+              <div class="container">
+                 <span class="card-title"><b>${d.ADMIN}</b></span> <br />
+                 <span class="card-total-cases">${c.cases} total cases</span>
+                 <div class="card-spacer"></div>
+                 <hr />
+                 <div class="card-spacer"></div>
+                 <span>${c.active} active</span> <br />
+                 <span>${c.deaths} dead</span> <br />
+                 <span>${c.recovered} recovered</span>
+                 <div class="card-spacer"></div>
+                 <hr />
+                 <div class="card-spacer"></div>
+                 <div class="bottom-info">
+                  <span style="color: goldenrod;">Today</span>
+                  <span>${c.todayCases} cases</span>
+                  <span>${c.todayDeaths} deaths</span>
+                 </div>
+              </div>
+            </div>
           `
     );
 
@@ -38,35 +55,33 @@ function init() {
 
 async function getCases() {
   const countries = await request(geojsonUrl);
-  const { data } = await request(apiUrl);
+  const data = await request(apiUrl);
 
-  // Change location names based on geojson
-  const usIdx = data.findIndex(i => i.location === 'US');
-  data[usIdx].location = 'United States of America';
-  const skIdx = data.findIndex(i => i.location === 'Korea, South');
-  data[skIdx].location = 'South Korea';
+  const countriesWithCovid = []
 
   data.forEach(item => {
     const countryIdx = countries.features.findIndex(
-      i => i.properties.ADMIN === item.location
+      i => i.properties.ISO_A2 === item.countryInfo.iso2 && i.properties.ISO_A3 === item.countryInfo.iso3
     );
 
-    if (countryIdx !== -1) {
-      countries.features[countryIdx].properties.COVID_TOTAL_CONFIRMED =
-        item.confirmed;
-      countries.features[countryIdx].properties.COVID_ACTIVE_CASES =
-        item.confirmed - (item.deaths + item.recovered);
-      countries.features[countryIdx].properties.COVID_DEATHS = item.deaths;
-      countries.features[countryIdx].properties.COVID_RECOVERED =
-        item.recovered;
-      item.recovered;
+    const clone = {
+      ...countries.features[countryIdx]
     }
-  });
 
-  world.polygonsData(countries.features);
+    if (countryIdx !== -1) {
+      countriesWithCovid.push({
+        ...countries.features[countryIdx],
+        covid: item
+      });
+    }
+
+    
+  });
+console.log(countriesWithCovid)
+  world.polygonsData(countriesWithCovid);
 
   // Show total counts
-  const totalInfected = data.reduce((a, b) => a + b.confirmed, 0);
+  const totalInfected = data.reduce((a, b) => a + b.cases, 0);
   const infected = new CountUp('infected', totalInfected);
   infected.start();
 
@@ -86,7 +101,7 @@ async function getCases() {
         .polygonAltitude(feat =>
           Math.max(
             0.1,
-            Math.sqrt(+feat.properties.COVID_TOTAL_CONFIRMED) * 7e-5
+            Math.sqrt(+feat.properties.POP_EST) * 7e-5
           )
         ),
     3000

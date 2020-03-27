@@ -47,3 +47,46 @@ body {
 #recovered {
   color: #1ae021;
 }
+
+.card {
+  font-family: 'Space Mono', monospace;
+  transition: 0.3s;
+  background: #000000;
+  width: 190px;
+  border: 2px solid white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container {
+  /* padding: 3px 16px; */
+  padding-top: 1px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.card-img {
+  object-fit: contain;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-total-cases {
+  font-size: 11px;
+}
+
+.card-spacer {
+  height: 5px;
+}
+
+.bottom-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+}
