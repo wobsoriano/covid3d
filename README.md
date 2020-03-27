@@ -23,6 +23,7 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 ## Built with
 
 - [globe.gl](https://github.com/vasturiano/globe.gl)
+- [d3.js](https://d3js.org/)
 - [CountUp.js](https://inorganik.github.io/countUp.js/)
 - https://github.com/NovelCOVID/API
 
