@@ -2,7 +2,7 @@
 
 3D visualization of COVID-19.
 
-![demo](https://i.imgur.com/hDwCtBJ.png)
+![demo](https://i.imgur.com/raeBpjq.png)
 
 ## Installing
 
