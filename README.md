@@ -1,6 +1,8 @@
 # COVID-3D
 
-3D visualization of COVID-19.
+3D visualization of latest data regarding Coronavirus cases, provided by the World Health Organization. Available in API form via https://github.com/NovelCOVID/API.
+
+Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
 ![demo](https://i.imgur.com/lQpWQU4.png)
 
@@ -22,7 +24,7 @@
 
 - [globe.gl](https://github.com/vasturiano/globe.gl)
 - [CountUp.js](https://inorganik.github.io/countUp.js/)
-- [CSSEGISandData](https://github.com/CSSEGISandData/COVID-19)
+- https://github.com/NovelCOVID/API
 
 ## License & copyright
 
@@ -32,5 +34,5 @@ Licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- Inspired from https://covidvisualizer.com
+- Inspired by https://covidvisualizer.com
 - Hat tip to anyone whos module was used
