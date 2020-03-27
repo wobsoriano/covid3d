@@ -4,7 +4,7 @@
 
 Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
-![demo](https://i.imgur.com/lQpWQU4.png)
+![demo](https://i.imgur.com/1AFEXhs.png)
 
 ## Installing
 
