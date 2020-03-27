@@ -17,7 +17,7 @@ function init() {
   world = Globe()(globeContainer)
     .globeImageUrl(globeImageUrl)
     .backgroundImageUrl(backgroundImageUrl)
-    .pointOfView({ altitude: 4 }, 5000)
+    .pointOfView({ altitude: 2.5 }, 5000)
     .polygonCapColor(feat => 'rgba(200, 0, 0, 0.6)')
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
     .polygonLabel(
@@ -84,7 +84,10 @@ async function getCases() {
       world
         .polygonsTransitionDuration(4000)
         .polygonAltitude(feat =>
-          Math.max(0.1, Math.sqrt(+feat.properties.POP_EST) * 7e-5)
+          Math.max(
+            0.1,
+            Math.sqrt(+feat.properties.COVID_TOTAL_CONFIRMED) * 7e-5
+          )
         ),
     3000
   );
