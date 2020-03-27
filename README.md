@@ -1,6 +1,8 @@
 # COVID-3D
 
-3D visualization of COVID-19.
+3D visualization of latest data regarding Coronavirus cases, provided by the World Health Organization. Available in API form via https://github.com/NovelCOVID/API.
+
+Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
 ![demo](https://i.imgur.com/raeBpjq.png)
 
