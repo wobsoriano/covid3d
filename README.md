@@ -24,7 +24,7 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
 - [globe.gl](https://github.com/vasturiano/globe.gl)
 - [CountUp.js](https://inorganik.github.io/countUp.js/)
-- [CSSEGISandData](https://github.com/CSSEGISandData/COVID-19)
+- https://github.com/NovelCOVID/API
 
 ## License & copyright
 
