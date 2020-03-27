@@ -93,6 +93,7 @@ async function getCases() {
   });
 
   world.polygonsData(countriesWithCovid);
+  document.querySelector('.title-desc').innerHTML = 'Hover on a country or territory to see cases, deaths, and recoveries.'
 
   // Show total counts
   const totalInfected = data.reduce((a, b) => a + b.cases, 0);

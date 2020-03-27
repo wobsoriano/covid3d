@@ -53,7 +53,7 @@ body {
   transition: 0.3s;
   background-color: rgba(0, 0, 0, 0.7);
   width: 190px;
-  border: 2px solid white;
+  border: 2px solid steelblue;
   border-radius: 10px;
   text-align: center;
   z-index: 2;
