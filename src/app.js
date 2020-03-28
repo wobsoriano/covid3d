@@ -61,6 +61,12 @@ function init() {
       .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
       .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
     )
+    .onPolygonClick((d) => {
+      world.pointOfView({
+        lat: d.covid.countryInfo.lat,
+        lng: d.covid.countryInfo.long
+      }, 1000)
+    })
     .polygonsTransitionDuration(300);
 
   getCases();
@@ -76,10 +82,6 @@ async function getCases() {
     const countryIdx = countries.features.findIndex(
       i => i.properties.ISO_A2 === item.countryInfo.iso2 && i.properties.ISO_A3 === item.countryInfo.iso3
     );
-
-    const clone = {
-      ...countries.features[countryIdx]
-    }
 
     if (countryIdx !== -1) {
       countriesWithCovid.push({
