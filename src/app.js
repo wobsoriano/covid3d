@@ -1,6 +1,6 @@
 import Globe from 'globe.gl';
 import { CountUp } from 'countup.js';
-import { request, isMobile } from './utils';
+import { request } from './utils';
 import * as d3 from 'd3';
 
 // Globe container
@@ -62,14 +62,6 @@ function init() {
       .polygonAltitude(d => d === hoverD ? 0.12 : 0.06)
       .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
     )
-    .onPolygonClick((d) => {
-      if (isMobile) return;
-
-      world.pointOfView({
-        lat: d.covid.countryInfo.lat,
-        lng: d.covid.countryInfo.long
-      }, 1000)
-    })
     .polygonsTransitionDuration(300);
 
   getCases();
