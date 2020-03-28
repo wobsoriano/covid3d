@@ -1,21 +1,16 @@
 import Globe from 'globe.gl';
 import { CountUp } from 'countup.js';
 import { request } from './utils';
+import {
+  GLOBE_IMAGE_URL,
+  BACKGROUND_IMAGE_URL,
+  GEOJSON_URL,
+  CASES_API
+} from './constants';
 import * as d3 from 'd3';
 
 // Globe container
 const globeContainer = document.getElementById('globeViz');
-// Globe image url
-const globeImageUrl =
-  '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg';
-// Background image url
-const backgroundImageUrl =
-  '//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png';
-// Geojson url
-const geojsonUrl =
-  'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson';
-// COVID-19 cases api
-const apiUrl = 'https://corona.lmao.ninja/countries?sort=country';
 
 const colorScale = d3.scaleSequentialPow(d3.interpolateOrRd).exponent(1/4)
 const getVal = feat => feat.covid.cases;
@@ -26,8 +21,8 @@ init();
 
 function init() {
   world = Globe()(globeContainer)
-    .globeImageUrl(globeImageUrl)
-    .backgroundImageUrl(backgroundImageUrl)
+    .globeImageUrl(GLOBE_IMAGE_URL)
+    .backgroundImageUrl(BACKGROUND_IMAGE_URL)
     .showGraticules(false)
     .polygonAltitude(0.06)
     .polygonCapColor(feat => colorScale(getVal(feat)))
@@ -68,10 +63,11 @@ function init() {
 }
 
 async function getCases() {
-  const countries = await request(geojsonUrl);
-  const data = await request(apiUrl);
+  const countries = await request(GEOJSON_URL);
+  const data = await request(CASES_API);
 
-  const countriesWithCovid = []
+  const countriesWithCovid = [];
+
   data.forEach(item => {
     const countryIdxByISO = countries.features.findIndex(
       i => i.properties.ISO_A2 === item.countryInfo.iso2 && i.properties.ISO_A3 === item.countryInfo.iso3
@@ -83,7 +79,8 @@ async function getCases() {
         covid: item
       });
     } else {
-      // If no country is found using their ISO, try with name
+
+      // If no country was found using their ISO, try with name
       const countryIdxByName = countries.features.findIndex(
         i => i.properties.ADMIN.toLowerCase() === item.country.toLowerCase()
       );
@@ -95,7 +92,6 @@ async function getCases() {
         });
       }
     }
-    
     
     const maxVal = Math.max(...countriesWithCovid.map(getVal));
     colorScale.domain([0, maxVal]);
@@ -113,7 +109,7 @@ async function getCases() {
   world.pointOfView({
     lat: latitude,
     lng: longitude
-  }, 2000);
+  }, 1000);
 }
 
 function showTotalCounts(data) {
