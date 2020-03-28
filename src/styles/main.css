@@ -6,6 +6,7 @@
 body {
   font-family: 'Space Mono', monospace;
   overflow: hidden;
+  background: black;
 }
 
 .top-info-container {
@@ -34,6 +35,7 @@ body {
 .title-desc {
   margin-top: 5px;
   color: #ccd6f6;
+  padding: 0 5px;
 }
 
 #infected {

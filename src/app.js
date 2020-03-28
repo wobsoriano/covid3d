@@ -27,6 +27,7 @@ function init() {
   world = Globe()(globeContainer)
     .globeImageUrl(globeImageUrl)
     .backgroundImageUrl(backgroundImageUrl)
+    .showGraticules(false)
     .polygonAltitude(0.06)
     .polygonCapColor(feat => colorScale(getVal(feat)))
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
@@ -88,8 +89,8 @@ async function getCases() {
     }
 
     
-  const maxVal = Math.max(...countriesWithCovid.map(getVal));
-  colorScale.domain([0, maxVal]);
+    const maxVal = Math.max(...countriesWithCovid.map(getVal));
+    colorScale.domain([0, maxVal]);
   });
 
   world.polygonsData(countriesWithCovid);
@@ -107,6 +108,14 @@ async function getCases() {
   const totalRecovered = data.reduce((a, b) => a + b.recovered, 0);
   const recovered = new CountUp('recovered', totalRecovered);
   recovered.start();
+
+  // Get IP Address
+  const { latitude, longitude } = await request('https://geolocation-db.com/json/');
+
+  world.pointOfView({
+    lat: latitude,
+    lng: longitude
+  }, 2000);
 }
 
 async function request(url) {
