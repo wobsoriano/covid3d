@@ -1,5 +1,6 @@
 import Globe from 'globe.gl';
 import { CountUp } from 'countup.js';
+import { request, isMobile } from './utils';
 import * as d3 from 'd3';
 
 // Globe container
@@ -62,6 +63,8 @@ function init() {
       .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
     )
     .onPolygonClick((d) => {
+      if (isMobile) return;
+
       world.pointOfView({
         lat: d.covid.countryInfo.lat,
         lng: d.covid.countryInfo.long
@@ -118,16 +121,6 @@ async function getCases() {
     lat: latitude,
     lng: longitude
   }, 2000);
-}
-
-async function request(url) {
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  } catch (e) {
-    throw e;
-  }
 }
 
 // Responsive globe
