@@ -72,19 +72,30 @@ async function getCases() {
   const data = await request(apiUrl);
 
   const countriesWithCovid = []
-
   data.forEach(item => {
-    const countryIdx = countries.features.findIndex(
+    const countryIdxByISO = countries.features.findIndex(
       i => i.properties.ISO_A2 === item.countryInfo.iso2 && i.properties.ISO_A3 === item.countryInfo.iso3
     );
 
-    if (countryIdx !== -1) {
+    if (countryIdxByISO !== -1) {
       countriesWithCovid.push({
-        ...countries.features[countryIdx],
+        ...countries.features[countryIdxByISO],
         covid: item
       });
-    }
+    } else {
+      // If no country is found using their ISO, try with name
+      const countryIdxByName = countries.features.findIndex(
+        i => i.properties.ADMIN.toLowerCase() === item.country.toLowerCase()
+      );
 
+      if (countryIdxByName !== -1) {
+        countriesWithCovid.push({
+          ...countries.features[countryIdxByName],
+          covid: item
+        });
+      }
+    }
+    
     
     const maxVal = Math.max(...countriesWithCovid.map(getVal));
     colorScale.domain([0, maxVal]);
@@ -94,6 +105,18 @@ async function getCases() {
   document.querySelector('.title-desc').innerHTML = 'Hover on a country or territory to see cases, deaths, and recoveries.'
 
   // Show total counts
+  showTotalCounts(data);
+
+  // Get IP Address
+  const { latitude, longitude } = await request('https://geolocation-db.com/json/');
+
+  world.pointOfView({
+    lat: latitude,
+    lng: longitude
+  }, 2000);
+}
+
+function showTotalCounts(data) {
   const totalInfected = data.reduce((a, b) => a + b.cases, 0);
   const infected = new CountUp('infected', totalInfected);
   infected.start();
@@ -105,14 +128,6 @@ async function getCases() {
   const totalRecovered = data.reduce((a, b) => a + b.recovered, 0);
   const recovered = new CountUp('recovered', totalRecovered);
   recovered.start();
-
-  // Get IP Address
-  const { latitude, longitude } = await request('https://geolocation-db.com/json/');
-
-  world.pointOfView({
-    lat: latitude,
-    lng: longitude
-  }, 2000);
 }
 
 // Responsive globe
