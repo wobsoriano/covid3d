@@ -21,6 +21,12 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
    ```bash
    npm run dev
    ```
+ 
+## Compiles and minifies for production
+
+```bash
+npm run build
+```
 
 ## Built with
 
