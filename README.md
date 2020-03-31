@@ -10,17 +10,25 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
 ## Installing
 
-1. Install dependencies
+1. Download and install [Node.js](https://nodejs.org/en/)
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Fire up the server and watch files
+3. Fire up the server and watch files
 
    ```bash
    npm run dev
    ```
+ 
+## Compiles and minifies for production
+
+```bash
+npm run build
+```
 
 ## Built with
 
