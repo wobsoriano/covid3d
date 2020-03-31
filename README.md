@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/7eDr4fv" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;" ></a>
+
 # COVID-3D
 
 3D visualization of latest data regarding Coronavirus cases, provided by the World Health Organization. Available in API form via https://github.com/NovelCOVID/API.
