@@ -1,6 +1,7 @@
 import Globe from 'globe.gl';
 import { CountUp } from 'countup.js';
 import { request, getCoordinates } from './utils';
+import dayjs from 'dayjs';
 import {
   GLOBE_IMAGE_URL,
   BACKGROUND_IMAGE_URL,
@@ -126,6 +127,10 @@ async function getCases() {
 
 function showTotalCounts(data) {
   const world = data.find(i => i.country === 'World');
+
+  const updated = dayjs(world.updated).format('MMMM D, YYYY, h:mm:ss A');
+  document.querySelector('.updated').innerHTML = `(as of ${updated})`;
+
   const infected = new CountUp('infected', world.cases);
   infected.start();
 
