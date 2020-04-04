@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export async function request(url) {
   try {
     const res = await fetch(url);
@@ -25,6 +27,10 @@ export async function getCoordinates() {
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export function formatDate(date, format = 'MMMM D, YYYY, h:mm:ss A') {
+  return dayjs(date).format(format);
 }
 
 export const isMobile = (function(a) {
