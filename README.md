@@ -6,7 +6,7 @@
 
 Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
-![demo](https://i.imgur.com/1AFEXhs.png)
+![demo](https://i.imgur.com/sClErhT.gif)
 
 ## Installing
 
