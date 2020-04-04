@@ -1,6 +1,6 @@
 import Globe from 'globe.gl';
 import { CountUp } from 'countup.js';
-import { request, getCoordinates } from './utils';
+import { request, getCoordinates, numberWithCommas } from './utils';
 import dayjs from 'dayjs';
 import {
   GLOBE_IMAGE_URL,
@@ -35,20 +35,22 @@ function init() {
               <img class="card-img" src="${c.countryInfo.flag}" alt="flag" />
               <div class="container">
                  <span class="card-title"><b>${d.ADMIN}</b></span> <br />
-                 <span class="card-total-cases">${c.cases} total cases</span>
+                 <span class="card-total-cases">${numberWithCommas(
+                   c.cases
+                 )} total cases</span>
                  <div class="card-spacer"></div>
                  <hr />
                  <div class="card-spacer"></div>
-                 <span>${c.active} active</span> <br />
-                 <span>${c.deaths} dead</span> <br />
-                 <span>${c.recovered} recovered</span>
+                 <span>${numberWithCommas(c.active)} active</span> <br />
+                 <span>${numberWithCommas(c.deaths)} dead</span> <br />
+                 <span>${numberWithCommas(c.recovered)} recovered</span>
                  <div class="card-spacer"></div>
                  <hr />
                  <div class="card-spacer"></div>
                  <div class="bottom-info">
                   <span style="color: goldenrod;">Today</span>
-                  <span>${c.todayCases} cases</span>
-                  <span>${c.todayDeaths} deaths</span>
+                  <span>${numberWithCommas(c.todayCases)} cases</span>
+                  <span>${numberWithCommas(c.todayDeaths)} deaths</span>
                  </div>
               </div>
             </div>
