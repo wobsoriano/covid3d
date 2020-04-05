@@ -5,7 +5,7 @@ import {
   GLOBE_IMAGE_URL,
   BACKGROUND_IMAGE_URL,
   GEOJSON_URL,
-  CASES_API
+  CASES_API,
 } from './constants';
 import * as d3 from 'd3';
 
@@ -13,7 +13,7 @@ import * as d3 from 'd3';
 const globeContainer = document.getElementById('globeViz');
 
 const colorScale = d3.scaleSequentialPow(d3.interpolateOrRd).exponent(1 / 4);
-const getVal = feat => feat.covid.cases;
+const getVal = (feat) => feat.covid.cases;
 
 let world;
 
@@ -25,7 +25,7 @@ function init() {
     .backgroundImageUrl(BACKGROUND_IMAGE_URL)
     .showGraticules(false)
     .polygonAltitude(0.06)
-    .polygonCapColor(feat => colorScale(getVal(feat)))
+    .polygonCapColor((feat) => colorScale(getVal(feat)))
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
     .polygonStrokeColor(() => '#111')
     .polygonLabel(
@@ -55,10 +55,10 @@ function init() {
             </div>
           `
     )
-    .onPolygonHover(hoverD =>
+    .onPolygonHover((hoverD) =>
       world
-        .polygonAltitude(d => (d === hoverD ? 0.12 : 0.06))
-        .polygonCapColor(d =>
+        .polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06))
+        .polygonCapColor((d) =>
           d === hoverD ? 'steelblue' : colorScale(getVal(d))
         )
     )
@@ -73,9 +73,9 @@ async function getCases() {
 
   const countriesWithCovid = [];
 
-  data.forEach(item => {
+  data.forEach((item) => {
     const countryIdxByISO = countries.features.findIndex(
-      i =>
+      (i) =>
         i.properties.ISO_A2 === item.countryInfo.iso2 &&
         i.properties.ISO_A3 === item.countryInfo.iso3
     );
@@ -83,18 +83,18 @@ async function getCases() {
     if (countryIdxByISO !== -1) {
       countriesWithCovid.push({
         ...countries.features[countryIdxByISO],
-        covid: item
+        covid: item,
       });
     } else {
       // If no country was found using their ISO, try with name
       const countryIdxByName = countries.features.findIndex(
-        i => i.properties.ADMIN.toLowerCase() === item.country.toLowerCase()
+        (i) => i.properties.ADMIN.toLowerCase() === item.country.toLowerCase()
       );
 
       if (countryIdxByName !== -1) {
         countriesWithCovid.push({
           ...countries.features[countryIdxByName],
-          covid: item
+          covid: item,
         });
       }
     }
@@ -117,7 +117,7 @@ async function getCases() {
     world.pointOfView(
       {
         lat: latitude,
-        lng: longitude
+        lng: longitude,
       },
       1000
     );
@@ -127,24 +127,28 @@ async function getCases() {
 }
 
 function showTotalCounts(data) {
-  const world = data.find(i => i.country === 'World');
+  data = data.filter((i) => i.country !== 'World');
 
+  const lastUpdate = Math.max(...data.map((i) => i.updated));
   document.querySelector('.updated').innerHTML = `(as of ${formatDate(
-    world.updated
+    lastUpdate
   )})`;
 
-  const infected = new CountUp('infected', world.cases);
+  const totalInfected = data.reduce((a, b) => a + b.cases, 0);
+  const infected = new CountUp('infected', totalInfected);
   infected.start();
 
-  const deaths = new CountUp('deaths', world.deaths);
+  const totalDeaths = data.reduce((a, b) => a + b.deaths, 0);
+  const deaths = new CountUp('deaths', totalDeaths);
   deaths.start();
 
-  const recovered = new CountUp('recovered', world.recovered);
+  const totalRecovered = data.reduce((a, b) => a + b.recovered, 0);
+  const recovered = new CountUp('recovered', totalRecovered);
   recovered.start();
 }
 
 // Responsive globe
-window.addEventListener('resize', event => {
+window.addEventListener('resize', (event) => {
   world.width([event.target.innerWidth]);
   world.height([event.target.innerHeight]);
 });
