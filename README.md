@@ -41,7 +41,7 @@ npm run build
 
 © Robert C Soriano
 
-Licensed under the [MIT License](LICENSE.md).
+Licensed under the [GNU General Public License v3.0](LICENSE.md).
 
 ## Acknowledgments
 
