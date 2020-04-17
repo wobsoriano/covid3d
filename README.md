@@ -8,7 +8,7 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
 
 ![demo](https://i.imgur.com/sClErhT.gif)
 
-## Installing
+## 🛠 Installing
 
 1. Download and install [Node.js](https://nodejs.org/en/)
 
@@ -24,26 +24,32 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
    npm run dev
    ```
  
-## Compiles and minifies for production
+## 🚀 Compiles and minifies for production
 
 ```bash
 npm run build
 ```
 
-## Built with
+## 🛠 Built with
 
 - [globe.gl](https://github.com/vasturiano/globe.gl)
 - [d3.js](https://d3js.org/)
 - [CountUp.js](https://inorganik.github.io/countUp.js/)
 - https://github.com/NovelCOVID/API
 
-## License & copyright
+## 📝 License & copyright
 
 © Robert C Soriano
 
-Licensed under the [MIT License](LICENSE).
+Licensed under the [GNU General Public License](LICENSE.md).
 
-## Acknowledgments
+## 💕 Acknowledgments
 
 - Inspired by https://covidvisualizer.com
 - Hat tip to anyone whos module was used
+
+## 🚨 Forking this repo
+
+This site is fully open source, but as you all know, plagiarism is bad. I spent a non-negligible amount of effort developing this site and I'm proud of it! All I ask is to not claim this effort as your own.
+
+So, feel free to fork this repo. If you do, please just give me proper credit by linking back to the repo, https://github.com/sorxrob/covid-3d.
