@@ -18,6 +18,30 @@ body {
   width: 100%;
 }
 
+.config-button {
+  padding: 4px;
+}
+
+.config-button.orange {
+  color:white;
+  background-color: goldenrod;
+}
+
+.config-button.yellow {
+  color:black;
+  background-color: lightgoldenrodyellow;
+}
+
+.config-button.red {
+  color:white;
+  background-color: #ff4848;
+}
+
+.config-button.green {
+  color:white;
+  background-color: #1ae021;
+}
+
 .bottom-info-container {
   z-index: 1;
   bottom: 20px;
