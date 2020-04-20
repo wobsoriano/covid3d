@@ -46,6 +46,7 @@ Licensed under the [GNU General Public License](LICENSE.md).
 ## 💕 Acknowledgments
 
 - Inspired by https://covidvisualizer.com
+- [hugosoftdev](https://github.com/hugosoftdev) for adding [parameter selection](https://github.com/sorxrob/covid-3d/pull/8)
 - Hat tip to anyone whos module was used
 
 ## 🚨 Forking this repo
