@@ -13,23 +13,7 @@ import * as d3 from 'd3';
 const globeContainer = document.getElementById('globeViz');
 
 const colorScale = d3.scaleSequentialPow(d3.interpolateOrRd).exponent(1 / 4);
-
-const countriesWithCovid = [];
-
-let colorMethod = "Total";
-
-const getVal = (feat) => {
-  if(colorMethod == "Active"){
-    return feat.covid.active;
-  }
-  else if(colorMethod == "Deaths"){
-    return feat.covid.deaths;
-  }
-  else if(colorMethod == "Recovered"){
-    return feat.covid.recovered;
-  }
-  return feat.covid.cases;
-}; 
+const getVal = (feat) => feat.covid.cases;
 
 let world;
 
@@ -87,6 +71,8 @@ async function getCases() {
   const countries = await request(GEOJSON_URL);
   const data = await request(CASES_API);
 
+  const countriesWithCovid = [];
+
   data.forEach((item) => {
     const countryIdxByISO = countries.features.findIndex(
       (i) =>
@@ -120,11 +106,6 @@ async function getCases() {
   world.polygonsData(countriesWithCovid);
   document.querySelector('.title-desc').innerHTML =
     'Hover on a country or territory to see cases, deaths, and recoveries.';
-
-  document.getElementById("total-button").onclick = changeColorScaleMethod;
-  document.getElementById("active-button").onclick = changeColorScaleMethod;
-  document.getElementById("deaths-button").onclick = changeColorScaleMethod;
-  document.getElementById("recovered-button").onclick = changeColorScaleMethod;
 
   // Show total counts
   showTotalCounts(data);
@@ -164,31 +145,6 @@ function showTotalCounts(data) {
   const totalRecovered = data.reduce((a, b) => a + b.recovered, 0);
   const recovered = new CountUp('recovered', totalRecovered);
   recovered.start();
-}
-
-function changeColorScaleMethod(element) {
-  colorMethod = element.srcElement.innerText;
-
-  const colorMap = {
-    Total: "orange",
-    Active: "yellow",
-    Deaths: "red",
-    Recovered: "green"
-  };
-
-  const buttons = document.getElementsByClassName("config-button");
-
-  for(let i=0; i < buttons.length; i+=1){
-      if(buttons[i].innerText != colorMethod){
-        buttons[i].classList = ['config-button'];
-      } else {
-        buttons[i].classList = ['config-button ' + colorMap[colorMethod]];
-      }
-  }
-
-  const maxVal = Math.max(...countriesWithCovid.map(getVal));
-  colorScale.domain([0, maxVal]);
-  world.polygonsData(countriesWithCovid);
 }
 
 // Responsive globe
