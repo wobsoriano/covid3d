@@ -39,7 +39,7 @@ npm run build
 
 ## 📝 Contributions
 
-I'll only accept fixes for now. New features will be ignored. Thank you.
+I'll only accept fixes for now. New features will be ignored. I want to make the app as simple as it can be. Thank you.
 
 ## 📝 License & copyright
 
