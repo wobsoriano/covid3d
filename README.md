@@ -37,10 +37,6 @@ npm run build
 - [CountUp.js](https://inorganik.github.io/countUp.js/)
 - https://github.com/NovelCOVID/API
 
-## 📝 Contributions
-
-I'll only accept fixes for now. New features will be ignored. I want to make the app as simple as possible. Thank you.
-
 ## 📝 License & copyright
 
 © Robert C Soriano
@@ -54,6 +50,8 @@ Licensed under the [GNU General Public License](LICENSE.md).
 - Hat tip to anyone whos module was used
 
 ## 🚨 Forking this repo
+
+I'll only accept fixes for now. New features will be ignored. I want to make the app as simple as possible. Thank you.
 
 This site is fully open source, but as you all know, plagiarism is bad. I spent a non-negligible amount of effort developing this site and I'm proud of it! All I ask is to not claim this effort as your own.
 
