@@ -37,6 +37,10 @@ npm run build
 - [CountUp.js](https://inorganik.github.io/countUp.js/)
 - https://github.com/NovelCOVID/API
 
+## 📝 Contributions
+
+I'll only accept fixes for now. New features will be ignored. Thank you.
+
 ## 📝 License & copyright
 
 © Robert C Soriano
