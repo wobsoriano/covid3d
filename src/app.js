@@ -12,7 +12,7 @@ import * as d3 from 'd3';
 // Globe container
 const globeContainer = document.getElementById('globeViz');
 
-const colorScale = d3.scaleSequentialPow(d3.interpolateOrRd).exponent(1 / 4);
+const colorScale = d3.scaleSequentialPow(d3.interpolateYlOrRd).exponent(1 / 4);
 const getVal = (feat) => feat.covid.cases;
 
 let world;
