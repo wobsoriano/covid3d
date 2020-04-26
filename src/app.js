@@ -191,25 +191,16 @@ playButton.addEventListener('click', () => {
   }, 200);
 });
 
-const sliderListener = function () {
-  window.requestAnimationFrame(function () {
-    updateCounters();
-    updatePolygonsData();
-  });
-};
-
-slider.addEventListener('mousedown', function () {
-  sliderListener();
-  slider.addEventListener('mousemove', sliderListener);
-});
-slider.addEventListener('mouseup', function () {
-  slider.removeEventListener('mousemove', sliderListener);
-});
-
-// include the following line to maintain accessibility
-// by allowing the listener to also be fired for
-// appropriate keyboard events
-slider.addEventListener('keydown', sliderListener);
+if ('oninput' in slider) {
+  slider.addEventListener(
+    'input',
+    function () {
+      updateCounters();
+      updatePolygonsData();
+    },
+    false
+  );
+}
 
 // Responsive globe
 window.addEventListener('resize', (event) => {
