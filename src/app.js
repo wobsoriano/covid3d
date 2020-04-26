@@ -87,6 +87,9 @@ async function getCases() {
   slider.max = dates.length - 1;
   slider.value = dates.length - 1;
 
+  slider.disabled = false;
+  playButton.disabled = false;
+
   updateCounters();
   updatePolygonsData();
 
