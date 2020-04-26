@@ -167,10 +167,10 @@ async function updatePointOfView() {
 let interval;
 
 playButton.addEventListener('click', () => {
-  if (playButton.innerHTML === 'Play') {
-    playButton.innerHTML = 'Pause';
+  if (playButton.innerText === 'Play') {
+    playButton.innerText = 'Pause';
   } else {
-    playButton.innerHTML = 'Play';
+    playButton.innerText = 'Play';
     clearInterval(interval);
     return;
   }
