@@ -2,15 +2,31 @@
 
 # COVID-3D
 
-3D visualization of latest data regarding Coronavirus cases, provided by the World Health Organization. Available in API form via https://github.com/NovelCOVID/API.
+3D visualization of latest data regarding coronavirus cases with time travel.
 
-Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
+![demo](https://i.imgur.com/yUxIINE.gif)
 
-![demo](https://i.imgur.com/sClErhT.gif)
+## 🛠 Installing (Front-End)
 
-## 🛠 Installing
+1. Install dependencies
 
-1. Download and install [Node.js](https://nodejs.org/en/)
+   ```bash
+   npm install
+   ```
+
+2. Fire up the server and watch files
+
+   ```bash
+   npm run dev
+   ```
+
+## 🛠 Installing (Back-End)
+
+1. Go to backend folder
+
+   ```bash
+   cd backend
+   ```
 
 2. Install dependencies
 
@@ -18,10 +34,10 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
    npm install
    ```
 
-3. Fire up the server and watch files
+3. Fire up the server
 
    ```bash
-   npm run dev
+   npm start
    ```
 
 ## 🚀 Compiles and minifies for production
@@ -34,8 +50,6 @@ npm run build
 
 - [globe.gl](https://github.com/vasturiano/globe.gl)
 - [d3.js](https://d3js.org/)
-- [CountUp.js](https://inorganik.github.io/countUp.js/)
-- https://github.com/NovelCOVID/API
 
 ## 📝 License & copyright
 
