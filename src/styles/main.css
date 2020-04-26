@@ -57,7 +57,6 @@ body {
   width: 190px;
   border: 2px solid steelblue;
   border-radius: 10px;
-  text-align: center;
   z-index: 2;
 }
 
@@ -67,6 +66,7 @@ body {
   padding-bottom: 8px;
   padding-left: 12px;
   padding-right: 12px;
+  text-align: left;
 }
 
 .card-img {
@@ -78,10 +78,6 @@ body {
 
 .card-title {
   font-weight: bold;
-}
-
-.card-total-cases {
-  font-size: 11px;
 }
 
 .card-spacer {
@@ -96,4 +92,68 @@ body {
 
 .scene-tooltip {
   z-index: 2;
+}
+
+.timeline-container {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  color: #fff;
+  width: 60%;
+  align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .timeline-container {
+    width: 90%;
+  }
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: 2px;
+  width: 100%;
+  margin-right: 10px;
+  border-radius: 5px;
+  background: #ccd6f6;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #000;
+  cursor: pointer;
+  border: 2px solid #ccd6f6;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #000;
+  cursor: pointer;
+  border: 2px solid #ccd6f6;
+}
+
+.play-button {
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: rgba(1, 1, 1, 0);
+  border: 1px solid #ccd6f6;
+  color: #ccd6f6;
+  outline: none;
+  width: 5em;
 }

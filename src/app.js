@@ -1,5 +1,4 @@
 import Globe from 'globe.gl';
-import { CountUp } from 'countup.js';
 import { request, getCoordinates, numberWithCommas, formatDate } from './utils';
 import {
   GLOBE_IMAGE_URL,
@@ -13,9 +12,13 @@ import * as d3 from 'd3';
 const globeContainer = document.getElementById('globeViz');
 
 const colorScale = d3.scaleSequentialPow(d3.interpolateYlOrRd).exponent(1 / 4);
-const getVal = (feat) => feat.covid.cases;
+const getVal = (feat) => {
+  return feat.covidData.confirmed / feat.properties.POP_EST;
+};
 
 let world;
+
+const flagEndpoint = 'https://corona.lmao.ninja/assets/img/flags';
 
 init();
 
@@ -29,28 +32,20 @@ function init() {
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
     .polygonStrokeColor(() => '#111')
     .polygonLabel(
-      ({ properties: d, covid: c }) => `
+      ({ properties: d, covidData: c }) => `
             <div class="card">
-              <img class="card-img" src="${c.countryInfo.flag}" alt="flag" />
+              <img class="card-img" src="${flagEndpoint}/${d.ISO_A2.toLowerCase()}.png" alt="flag" />
               <div class="container">
-                 <span class="card-title"><b>${d.ADMIN}</b></span> <br />
-                 <span class="card-total-cases">${numberWithCommas(
-                   c.cases
-                 )} total cases</span>
+                 <span class="card-title"><b>${d.NAME}</b></span> <br />
                  <div class="card-spacer"></div>
                  <hr />
                  <div class="card-spacer"></div>
-                 <span>${numberWithCommas(c.active)} active</span> <br />
-                 <span>${numberWithCommas(c.deaths)} dead</span> <br />
-                 <span>${numberWithCommas(c.recovered)} recovered</span>
-                 <div class="card-spacer"></div>
-                 <hr />
-                 <div class="card-spacer"></div>
-                 <div class="bottom-info">
-                  <span style="color: goldenrod;">Today</span>
-                  <span>${numberWithCommas(c.todayCases)} cases</span>
-                  <span>${numberWithCommas(c.todayDeaths)} deaths</span>
-                 </div>
+                 <span>Cases: ${numberWithCommas(c.confirmed)}</span>  <br />
+                 <span>Deaths: ${numberWithCommas(c.deaths)}</span> <br />
+                 <span>Recovered: ${numberWithCommas(
+                   c.recoveries
+                 )}</span> <br />
+                 <span>Population: ${d3.format('.3s')(d.POP_EST)}</span>
               </div>
             </div>
           `
@@ -62,54 +57,94 @@ function init() {
           d === hoverD ? 'steelblue' : colorScale(getVal(d))
         )
     )
-    .polygonsTransitionDuration(300);
+    .polygonsTransitionDuration(200);
 
   getCases();
 }
 
+let dates = [];
+let countries = [];
+let featureCollection = [];
+
+// Play button
+const playButton = document.querySelector('.play-button');
+// Slider
+const slider = document.querySelector('.slider');
+// Slider date
+const sliderDate = document.querySelector('.slider-date');
+
 async function getCases() {
-  const countries = await request(GEOJSON_URL);
-  const data = await request(CASES_API);
+  countries = await request(CASES_API);
+  featureCollection = (await request(GEOJSON_URL)).features;
 
-  const countriesWithCovid = [];
-
-  data.forEach((item) => {
-    const countryIdxByISO = countries.features.findIndex(
-      (i) =>
-        i.properties.ISO_A2 === item.countryInfo.iso2 &&
-        i.properties.ISO_A3 === item.countryInfo.iso3
-    );
-
-    if (countryIdxByISO !== -1) {
-      countriesWithCovid.push({
-        ...countries.features[countryIdxByISO],
-        covid: item,
-      });
-    } else {
-      // If no country was found using their ISO, try with name
-      const countryIdxByName = countries.features.findIndex(
-        (i) => i.properties.ADMIN.toLowerCase() === item.country.toLowerCase()
-      );
-
-      if (countryIdxByName !== -1) {
-        countriesWithCovid.push({
-          ...countries.features[countryIdxByName],
-          covid: item,
-        });
-      }
-    }
-
-    const maxVal = Math.max(...countriesWithCovid.map(getVal));
-    colorScale.domain([0, maxVal]);
-  });
-
-  world.polygonsData(countriesWithCovid);
+  // world.polygonsData(countriesWithCovid);
   document.querySelector('.title-desc').innerHTML =
     'Hover on a country or territory to see cases, deaths, and recoveries.';
 
-  // Show total counts
-  showTotalCounts(data);
+  dates = Object.keys(countries.China);
 
+  // Set slider values
+  slider.max = dates.length - 1;
+  slider.value = dates.length - 1;
+
+  updateCounters();
+  updatePolygonsData();
+
+  updatePointOfView();
+}
+
+const infectedEl = document.querySelector('#infected');
+const deathsEl = document.querySelector('#deaths');
+const recoveriesEl = document.querySelector('#recovered');
+const updatedEl = document.querySelector('.updated');
+
+function updateCounters() {
+  sliderDate.innerHTML = dates[slider.value];
+
+  let totalConfirmed = 0;
+  let totalDeaths = 0;
+  let totalRecoveries = 0;
+
+  Object.keys(countries).forEach((item) => {
+    if (countries[item][dates[slider.value]]) {
+      const countryDate = countries[item][dates[slider.value]];
+      totalConfirmed += +countryDate.confirmed;
+      totalDeaths += +countryDate.deaths;
+      totalRecoveries += countryDate.recoveries ? +countryDate.recoveries : 0;
+    }
+  });
+
+  infectedEl.innerHTML = numberWithCommas(totalConfirmed);
+  deathsEl.innerHTML = numberWithCommas(totalDeaths);
+  recoveriesEl.innerHTML = numberWithCommas(totalRecoveries);
+
+  updatedEl.innerHTML = `(as of ${formatDate(dates[slider.value])})`;
+}
+
+function updatePolygonsData() {
+  for (let x = 0; x < featureCollection.length; x++) {
+    const country = featureCollection[x].properties.NAME;
+    if (countries[country]) {
+      featureCollection[x].covidData = {
+        confirmed: countries[country][dates[slider.value]].confirmed,
+        deaths: countries[country][dates[slider.value]].deaths,
+        recoveries: countries[country][dates[slider.value]].recoveries,
+      };
+    } else {
+      featureCollection[x].covidData = {
+        confirmed: 0,
+        deaths: 0,
+        recoveries: 0,
+      };
+    }
+  }
+
+  const maxVal = Math.max(...featureCollection.map(getVal));
+  colorScale.domain([0, maxVal]);
+  world.polygonsData(featureCollection);
+}
+
+async function updatePointOfView() {
   // Get coordinates
   try {
     const { latitude, longitude } = await getCoordinates();
@@ -126,26 +161,55 @@ async function getCases() {
   }
 }
 
-function showTotalCounts(data) {
-  data = data.filter((i) => i.country !== 'World');
+let interval;
 
-  const lastUpdate = Math.max(...data.map((i) => i.updated));
-  document.querySelector('.updated').innerHTML = `(as of ${formatDate(
-    lastUpdate
-  )})`;
+playButton.addEventListener('click', () => {
+  if (playButton.innerHTML === 'Play') {
+    playButton.innerHTML = 'Pause';
+  } else {
+    playButton.innerHTML = 'Play';
+    clearInterval(interval);
+    return;
+  }
 
-  const totalInfected = data.reduce((a, b) => a + b.cases, 0);
-  const infected = new CountUp('infected', totalInfected);
-  infected.start();
+  // Check if slider position is max
+  if (+slider.value === dates.length - 1) {
+    slider.value = 0;
+  }
 
-  const totalDeaths = data.reduce((a, b) => a + b.deaths, 0);
-  const deaths = new CountUp('deaths', totalDeaths);
-  deaths.start();
+  sliderDate.innerHTML = dates[slider.value];
 
-  const totalRecovered = data.reduce((a, b) => a + b.recovered, 0);
-  const recovered = new CountUp('recovered', totalRecovered);
-  recovered.start();
-}
+  interval = setInterval(() => {
+    slider.value++;
+    sliderDate.innerHTML = dates[slider.value];
+    updateCounters();
+    updatePolygonsData();
+    if (+slider.value === dates.length - 1) {
+      playButton.innerHTML = 'Play';
+      clearInterval(interval);
+    }
+  }, 200);
+});
+
+const sliderListener = function () {
+  window.requestAnimationFrame(function () {
+    updateCounters();
+    updatePolygonsData();
+  });
+};
+
+slider.addEventListener('mousedown', function () {
+  sliderListener();
+  slider.addEventListener('mousemove', sliderListener);
+});
+slider.addEventListener('mouseup', function () {
+  slider.removeEventListener('mousemove', sliderListener);
+});
+
+// include the following line to maintain accessibility
+// by allowing the listener to also be fired for
+// appropriate keyboard events
+slider.addEventListener('keydown', sliderListener);
 
 // Responsive globe
 window.addEventListener('resize', (event) => {

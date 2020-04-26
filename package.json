@@ -16,7 +16,6 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "countup.js": "^2.0.4",
     "d3": "^5.15.0",
     "dayjs": "^1.8.23",
     "globe.gl": "^2.8.5"

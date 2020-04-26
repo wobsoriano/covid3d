@@ -22,7 +22,17 @@
     </div>
 
     <div class="bottom-info-container">
-      <div style="font-size: 14px; color: #ccd6f6;">
+      <div style="display: flex; justify-content: center;">
+        <div class="timeline-container">
+          <button style="margin-right: 10px;" class="play-button">Play</button>
+          <input class="slider" type="range" min="0" max="1" step="1" />
+          <span
+            style="font-size: 14px; color: #ccd6f6;"
+            class="slider-date"
+          ></span>
+        </div>
+      </div>
+      <div style="font-size: 14px; color: #ccd6f6; margin-top: 35px;">
         Total Counts <span class="updated"></span>
       </div>
       <div style="color: #e6f1ff; padding: 0 5px;">
@@ -39,6 +49,7 @@
         >
       </div>
     </div>
+
     <script src="./app.js"></script>
   </body>
 </html>

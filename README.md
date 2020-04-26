@@ -23,7 +23,7 @@ Plotted using [globe.gl](https://github.com/vasturiano/globe.gl).
    ```bash
    npm run dev
    ```
- 
+
 ## 🚀 Compiles and minifies for production
 
 ```bash
@@ -47,6 +47,8 @@ Licensed under the [GNU General Public License](LICENSE.md).
 
 - Inspired by https://covidvisualizer.com
 - [hugosoftdev](https://github.com/hugosoftdev) for adding [parameter selection](https://github.com/sorxrob/covid-3d/pull/8)
+- Flags from https://corona.lmao.ninja
+- Coronavirus data from https://github.com/bumbeishvili/covid19-daily-data
 - Hat tip to anyone whos module was used
 
 ## 🚨 Forking this repo
