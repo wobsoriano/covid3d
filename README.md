@@ -71,4 +71,4 @@ I'll only accept fixes for now. New features will be ignored. I want to make the
 
 This site is fully open source, but as you all know, plagiarism is bad. I spent a non-negligible amount of effort developing this site and I'm proud of it! All I ask is to not claim this effort as your own.
 
-So, feel free to fork this repo. If you do, please just give me proper credit by linking back to the repo, https://github.com/sorxrob/covid-3d.
+So, feel free to fork this repo. If you do, please just give me proper credit by linking back to the repo, https://github.com/sorxrob/covid3d.
