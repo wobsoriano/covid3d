@@ -22,4 +22,4 @@ jobs:
         working-directory: backend
         run: npm install && node update-data.js
         env:
-          MY_PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
