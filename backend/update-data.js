@@ -53,7 +53,7 @@ async function createCommit(octokit, { owner, repo, base, changes }) {
 }
 
 async function run() {
-  const octokit = github.getOctokit('172adcc647b821700044d15e90f81af619b2219a');
+  const octokit = github.getOctokit(process.env.PROFILE_TOKEN);
   const { data: user } = await octokit.users.getAuthenticated();
 
   const data = await TimeSeries.fetchTimeSeries();
