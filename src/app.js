@@ -31,11 +31,10 @@ function init() {
     .polygonCapColor((feat) => colorScale(getVal(feat)))
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
     .polygonStrokeColor(() => '#111')
-    .polygonLabel(
-      ({ properties: d, covidData: c }) => {
-        const flagName = d.ADMIN === 'France' ? 'fr' : d.ISO_A2.toLowerCase();
+    .polygonLabel(({ properties: d, covidData: c }) => {
+      const flagName = d.ADMIN === 'France' ? 'fr' : d.ISO_A2.toLowerCase();
 
-        return `
+      return `
         <div class="card">
           <img class="card-img" src="${flagEndpoint}/${flagName}.png" alt="flag" />
           <div class="container">
@@ -45,15 +44,12 @@ function init() {
              <div class="card-spacer"></div>
              <span>Cases: ${numberWithCommas(c.confirmed)}</span>  <br />
              <span>Deaths: ${numberWithCommas(c.deaths)}</span> <br />
-             <span>Recovered: ${numberWithCommas(
-               c.recoveries
-             )}</span> <br />
+             <span>Recovered: ${numberWithCommas(c.recoveries)}</span> <br />
              <span>Population: ${d3.format('.3s')(d.POP_EST)}</span>
           </div>
         </div>
-      `
-      }
-    )
+      `;
+    })
     .onPolygonHover((hoverD) =>
       world
         .polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06))
