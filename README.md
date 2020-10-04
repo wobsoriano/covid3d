@@ -34,7 +34,15 @@
    npm install
    ```
 
-3. Fire up the server
+3. Copy `.env.example` to `.env` and add GitHub Personal access token
+
+4. Get current cases data
+ 
+   ```bash
+   node update-data.js
+   ```
+
+5. Fire up the server
 
    ```bash
    npm start

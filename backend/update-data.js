@@ -1,3 +1,4 @@
+require('dotenv').config();
 const TimeSeries = require('./TimeSeries');
 const github = require('@actions/github');
 
