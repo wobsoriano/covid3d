@@ -4,12 +4,21 @@ const core = require('@actions/core');
 
 async function run() {
   try {
+    console.log(process.env.MY_TOKEN);
     const octokit = github.getOctokit(process.env.MY_TOKEN);
     const { data: user } = await octokit.users.getAuthenticated();
 
     const REPO_NAME = user.login;
 
     const ts = new TimeSeries();
+
+    const {
+      data: { sha },
+    } = await octokit.repos.getReadme({
+      path: 'data.json',
+      owner: user.login,
+      repo: REPO_NAME,
+    });
 
     const { data } = await octokit.repos.createOrUpdateFileContents({
       owner: user.login,
