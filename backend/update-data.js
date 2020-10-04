@@ -4,8 +4,8 @@ const core = require('@actions/core');
 
 async function run() {
   try {
-    console.log(process.env.MY_TOKEN);
-    const octokit = github.getOctokit(process.env.MY_TOKEN);
+    console.log(process.env.PROFILE_TOKEN);
+    const octokit = github.getOctokit(process.env.PROFILE_TOKEN);
     const { data: user } = await octokit.users.getAuthenticated();
 
     const REPO_NAME = user.login;
