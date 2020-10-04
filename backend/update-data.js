@@ -60,7 +60,7 @@ async function run() {
 
   createCommit(octokit, {
     owner: user.login,
-    repo: 'octotest',
+    repo: 'covid3d',
     changes: {
       commit: 'Update cases data',
       files: {
