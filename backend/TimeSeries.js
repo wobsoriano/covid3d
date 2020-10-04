@@ -96,13 +96,13 @@ class TimeSeries {
     console.log(
       path.join(
         __dirname,
-        'backend/files/' + 'time_series_19-covid-Confirmed.csv'
+        'files/' + 'time_series_19-covid-Confirmed.csv'
       )
     );
     return this.parseCSV(
       path.join(
         __dirname,
-        'backend/files/' + 'time_series_19-covid-Confirmed.csv'
+        'files/' + 'time_series_19-covid-Confirmed.csv'
       )
     );
   }
@@ -111,14 +111,14 @@ class TimeSeries {
     return this.parseCSV(
       path.join(
         __dirname,
-        'backend/files/' + 'time_series_19-covid-Recovered.csv'
+        'files/' + 'time_series_19-covid-Recovered.csv'
       )
     );
   }
 
   getDeaths() {
     return this.parseCSV(
-      path.join(__dirname, 'backend/files/' + 'time_series_19-covid-Deaths.csv')
+      path.join(__dirname, 'files/' + 'time_series_19-covid-Deaths.csv')
     );
   }
 }
