@@ -93,6 +93,12 @@ class TimeSeries {
   }
 
   getConfirmedCases() {
+    console.log(
+      path.join(
+        __dirname,
+        'backend/files/' + 'time_series_19-covid-Confirmed.csv'
+      )
+    );
     return this.parseCSV(
       path.join(
         __dirname,
