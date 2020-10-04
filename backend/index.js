@@ -14,7 +14,8 @@ app.use(cache('1 hour'));
 app.get('/', (req, res) => {
   fs.readFile('data.json', (err, buffer) => {
     if (err) {
-      return res.status(500).err({ err });
+      console.log(err);
+      return res.status(500).send({ err });
     }
 
     res.json(JSON.parse(buffer));
