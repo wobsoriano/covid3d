@@ -17,7 +17,7 @@ const getVal = (feat) => {
 };
 
 let world;
-
+let flagName;
 const flagEndpoint = 'https://corona.lmao.ninja/assets/img/flags';
 
 init();
@@ -32,7 +32,13 @@ function init() {
     .polygonSideColor(() => 'rgba(0, 100, 0, 0.05)')
     .polygonStrokeColor(() => '#111')
     .polygonLabel(({ properties: d, covidData: c }) => {
-      const flagName = d.ADMIN === 'France' ? 'fr' : d.ISO_A2.toLowerCase();
+      if (d.ADMIN === 'France') {
+        flagName = 'fr';
+      } else if (d.ADMIN === 'Norway') {
+        flagName = 'no';
+      } else {
+        flagName = d.ISO_A2.toLowerCase();
+      }
 
       return `
         <div class="card">
