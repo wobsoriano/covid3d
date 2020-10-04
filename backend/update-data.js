@@ -56,7 +56,11 @@ async function run() {
   const octokit = github.getOctokit(process.env.PROFILE_TOKEN);
   const { data: user } = await octokit.users.getAuthenticated();
 
-  const data = await TimeSeries.fetchTimeSeries();
+//   const data = await TimeSeries.fetchTimeSeries();
+const data = {
+    test: true,
+    hello: 'world'
+}
 
   createCommit(octokit, {
     owner: user.login,
