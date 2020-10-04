@@ -10,8 +10,6 @@ async function run() {
 
     const REPO_NAME = user.login;
 
-    const ts = new TimeSeries();
-
     const {
       data: { sha },
     } = await octokit.repos.getContent({
@@ -30,9 +28,9 @@ async function run() {
         name: user.name,
         email: user.email,
       },
-      content: Buffer.from(JSON.stringify(ts.fetchTimeSeries())).toString(
-        'base64'
-      ),
+      content: Buffer.from(
+        JSON.stringify(TimeSeries.fetchTimeSeries())
+      ).toString('base64'),
     });
 
     console.log(data);
