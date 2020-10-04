@@ -20,15 +20,13 @@ class TimeSeries {
 
     let countryMapper = {};
 
-    // Load confirmed cases
-    const confirmedRows = await this.getConfirmedCases();
+    const [confirmedRows, recoveredRows, deathRows] = await Promise.all([
+      this.getConfirmedCases(),
+      this.getRecovered(),
+      this.getDeaths(),
+    ]);
+
     const headers = Object.keys(confirmedRows[0]);
-
-    // Load recovered sheet
-    const recoveredRows = await this.getRecovered();
-
-    // Load recovered sheet
-    const deathRows = await this.getDeaths();
 
     confirmedRows.forEach((row) => {
       headers.slice(4).forEach((header) => {
