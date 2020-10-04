@@ -14,11 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        working-directory: ./backend
       - name: Set Node.js version to ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
       - run: npm install
-      - run: cd backend && node update-data.js
+      - run: node update-data.js
         env:
           MY_PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
