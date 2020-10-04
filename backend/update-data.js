@@ -18,6 +18,8 @@ async function run() {
       repo: REPO_NAME,
     });
 
+    const timeSeries = await TimeSeries.fetchTimeSeries();
+
     const { data } = await octokit.repos.createOrUpdateFileContents({
       owner: user.login,
       repo: REPO_NAME,
@@ -28,9 +30,7 @@ async function run() {
         name: user.name,
         email: user.email,
       },
-      content: Buffer.from(
-        JSON.stringify(TimeSeries.fetchTimeSeries())
-      ).toString('base64'),
+      content: Buffer.from(JSON.stringify(timeSeries)).toString('base64'),
     });
 
     console.log(data);
