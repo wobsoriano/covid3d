@@ -6,7 +6,7 @@
 
 ![demo](https://i.imgur.com/yUxIINE.gif)
 
-## 🛠 Installing (Front-End)
+## 🛠 Installing
 
 1. Install dependencies
 
@@ -18,26 +18,6 @@
 
    ```bash
    npm run dev
-   ```
-
-## 🛠 Installing (Back-End)
-
-1. Go to backend folder
-
-   ```bash
-   cd backend
-   ```
-
-2. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-3. Fire up the server
-
-   ```bash
-   npm start
    ```
 
 ## 🚀 Compiles and minifies for production

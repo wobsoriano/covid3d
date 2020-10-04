@@ -63,7 +63,7 @@ async function run() {
     changes: {
       commit: 'Update cases data',
       files: {
-        'backend/data.json': JSON.stringify(data),
+        'data.json': JSON.stringify(data),
       },
     },
   });

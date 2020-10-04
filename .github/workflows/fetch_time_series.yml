@@ -18,8 +18,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
-      - name: Run update data
-        working-directory: backend
-        run: npm install && node update-data.js
+      - name: Fetch cases data
+        run: npm install && node scripts/update-data.js
         env:
           PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
