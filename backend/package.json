@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
     "apicache": "^1.5.3",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",

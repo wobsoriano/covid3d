@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 app.use(cache('1 hour'));
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   const location = path.join(__dirname, 'data.json');
   fs.readFile(location, (err, buffer) => {
     if (err) {

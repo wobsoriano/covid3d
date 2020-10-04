@@ -67,8 +67,7 @@ class TimeSeries {
       });
     });
 
-    const data = JSON.stringify(countryMapper);
-    await this.writeToFile(data);
+    return countryMapper;
   }
 
   writeToFile(data) {
