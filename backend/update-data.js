@@ -1,42 +1,73 @@
 const TimeSeries = require('./TimeSeries');
 const github = require('@actions/github');
-const core = require('@actions/core');
+
+async function createCommit(octokit, { owner, repo, base, changes }) {
+  let response;
+
+  if (!base) {
+    response = await octokit.repos.get({ owner, repo });
+    base = response.data.default_branch;
+  }
+
+  response = await octokit.repos.listCommits({
+    owner,
+    repo,
+    sha: base,
+    per_page: 1,
+  });
+  let latestCommitSha = response.data[0].sha;
+  const treeSha = response.data[0].commit.tree.sha;
+
+  response = await octokit.git.createTree({
+    owner,
+    repo,
+    base_tree: treeSha,
+    tree: Object.keys(changes.files).map((path) => {
+      return {
+        path,
+        mode: '100644',
+        content: changes.files[path],
+      };
+    }),
+  });
+  const newTreeSha = response.data.sha;
+
+  response = await octokit.git.createCommit({
+    owner,
+    repo,
+    message: changes.commit,
+    tree: newTreeSha,
+    parents: [latestCommitSha],
+  });
+  latestCommitSha = response.data.sha;
+
+  await octokit.git.updateRef({
+    owner,
+    repo,
+    sha: latestCommitSha,
+    ref: `heads/master`,
+    force: true,
+  });
+
+  console.log('Project saved');
+}
 
 async function run() {
-  try {
-    console.log(process.env.MY_PROFILE_TOKEN);
-    const octokit = github.getOctokit(process.env.MY_PROFILE_TOKEN);
-    const { data: user } = await octokit.users.getAuthenticated();
+  const octokit = github.getOctokit('172adcc647b821700044d15e90f81af619b2219a');
+  const { data: user } = await octokit.users.getAuthenticated();
 
-    const REPO_NAME = user.login;
+  const data = await TimeSeries.fetchTimeSeries();
 
-    const {
-      data: { sha },
-    } = await octokit.repos.getContent({
-      path: 'data.json',
-      owner: user.login,
-      repo: REPO_NAME,
-    });
-
-    const timeSeries = await TimeSeries.fetchTimeSeries();
-
-    const { data } = await octokit.repos.createOrUpdateFileContents({
-      owner: user.login,
-      repo: REPO_NAME,
-      path: 'backend/data.json',
-      sha,
-      message: 'Update cases data',
-      committer: {
-        name: user.name,
-        email: user.email,
+  createCommit(octokit, {
+    owner: user.login,
+    repo: 'octotest',
+    changes: {
+      commit: 'Update cases data',
+      files: {
+        'data.json': JSON.stringify(data),
       },
-      content: Buffer.from(JSON.stringify(timeSeries)).toString('base64'),
-    });
-
-    console.log(data);
-  } catch (err) {
-    core.setFailed(err);
-  }
+    },
+  });
 }
 
 run();
