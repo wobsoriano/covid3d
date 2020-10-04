@@ -70,40 +70,37 @@ class TimeSeries {
   }
 
   parseCSV(url) {
-    return new Promise((resolve, reject) => {
-      const rows = [];
-      csv()
-        .fromStream(request.get(url))
-        .subscribe(
-          (json) => {
-            rows.push(json);
-          },
-          () => {
-            reject();
-          },
-          () => {
-            resolve(rows);
-          }
-        );
-    });
+    // return new Promise((resolve, reject) => {
+    //   const rows = [];
+    //   csv()
+    //     .fromStream(request.get(url))
+    //     .subscribe(
+    //       (json) => {
+    //         rows.push(json);
+    //       },
+    //       () => {
+    //         reject();
+    //       },
+    //       () => {
+    //         resolve(rows);
+    //       }
+    //     );
+    // });
+    return csv()
+      .fromFile(url)
+      .then((rows) => rows);
   }
 
   getConfirmedCases() {
-    return this.parseCSV(
-      `${this.timeSeriesURL}/time_series_19-covid-Confirmed.csv`
-    );
+    return this.parseCSV(`./files/time_series_19-covid-Confirmed.csv`);
   }
 
   getRecovered() {
-    return this.parseCSV(
-      `${this.timeSeriesURL}/time_series_19-covid-Recovered.csv`
-    );
+    return this.parseCSV(`./files/time_series_19-covid-Recovered.csv`);
   }
 
   getDeaths() {
-    return this.parseCSV(
-      `${this.timeSeriesURL}/time_series_19-covid-Deaths.csv`
-    );
+    return this.parseCSV(`./files/time_series_19-covid-Deaths.csv`);
   }
 }
 
