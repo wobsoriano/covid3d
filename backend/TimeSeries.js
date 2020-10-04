@@ -1,5 +1,6 @@
 const request = require('request');
 const csv = require('csvtojson');
+const path = require('path');
 
 class TimeSeries {
   constructor() {
@@ -92,15 +93,27 @@ class TimeSeries {
   }
 
   getConfirmedCases() {
-    return this.parseCSV(`./files/time_series_19-covid-Confirmed.csv`);
+    return this.parseCSV(
+      path.join(
+        __dirname,
+        'backend/files/' + 'time_series_19-covid-Confirmed.csv'
+      )
+    );
   }
 
   getRecovered() {
-    return this.parseCSV(`./files/time_series_19-covid-Recovered.csv`);
+    return this.parseCSV(
+      path.join(
+        __dirname,
+        'backend/files/' + 'time_series_19-covid-Recovered.csv'
+      )
+    );
   }
 
   getDeaths() {
-    return this.parseCSV(`./files/time_series_19-covid-Deaths.csv`);
+    return this.parseCSV(
+      path.join(__dirname, 'backend/files/' + 'time_series_19-covid-Deaths.csv')
+    );
   }
 }
 
