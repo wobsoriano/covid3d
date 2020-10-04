@@ -1,5 +1,6 @@
 const request = require('request');
 const csv = require('csvtojson');
+const fs = require('fs');
 
 class TimeSeries {
   constructor() {
@@ -67,6 +68,18 @@ class TimeSeries {
     });
 
     return countryMapper;
+  }
+
+  writeToFile(data) {
+    return new Promise(function (resolve, reject) {
+      fs.writeFile('./data.json', data, 'utf-8', function (err) {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(null);
+      });
+    });
   }
 
   parseCSV(url) {
