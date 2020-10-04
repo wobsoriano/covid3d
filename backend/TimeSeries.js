@@ -20,6 +20,7 @@ class TimeSeries {
 
     let countryMapper = {};
 
+    // Run in parallel
     const [confirmedRows, recoveredRows, deathRows] = await Promise.all([
       this.getConfirmedCases(),
       this.getRecovered(),
