@@ -1,6 +1,6 @@
 const request = require('request');
 const csv = require('csvtojson');
-const path = require('path');
+const fs = require('fs');
 
 class TimeSeries {
   constructor() {
@@ -67,58 +67,56 @@ class TimeSeries {
       });
     });
 
-    return countryMapper;
+    const data = JSON.stringify(countryMapper);
+    await this.writeToFile(data);
+  }
+
+  writeToFile(data) {
+    return new Promise(function (resolve, reject) {
+      fs.writeFile('./data.json', data, 'utf-8', function (err) {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(null);
+      });
+    });
   }
 
   parseCSV(url) {
-    // return new Promise((resolve, reject) => {
-    //   const rows = [];
-    //   csv()
-    //     .fromStream(request.get(url))
-    //     .subscribe(
-    //       (json) => {
-    //         rows.push(json);
-    //       },
-    //       () => {
-    //         reject();
-    //       },
-    //       () => {
-    //         resolve(rows);
-    //       }
-    //     );
-    // });
-    return csv()
-      .fromFile(url)
-      .then((rows) => rows);
+    return new Promise((resolve, reject) => {
+      const rows = [];
+      csv()
+        .fromStream(request.get(url))
+        .subscribe(
+          (json) => {
+            rows.push(json);
+          },
+          () => {
+            reject();
+          },
+          () => {
+            resolve(rows);
+          }
+        );
+    });
   }
 
   getConfirmedCases() {
-    console.log(
-      path.join(
-        __dirname,
-        'files/' + 'time_series_19-covid-Confirmed.csv'
-      )
-    );
     return this.parseCSV(
-      path.join(
-        __dirname,
-        'files/' + 'time_series_19-covid-Confirmed.csv'
-      )
+      `${this.timeSeriesURL}/time_series_19-covid-Confirmed.csv`
     );
   }
 
   getRecovered() {
     return this.parseCSV(
-      path.join(
-        __dirname,
-        'files/' + 'time_series_19-covid-Recovered.csv'
-      )
+      `${this.timeSeriesURL}/time_series_19-covid-Recovered.csv`
     );
   }
 
   getDeaths() {
     return this.parseCSV(
-      path.join(__dirname, 'files/' + 'time_series_19-covid-Deaths.csv')
+      `${this.timeSeriesURL}/time_series_19-covid-Deaths.csv`
     );
   }
 }

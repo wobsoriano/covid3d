@@ -1,7 +1,7 @@
 const express = require('express');
 const apicache = require('apicache');
 const cors = require('cors');
-const TimeSeries = require('./TimeSeries');
+const fs = require('fs');
 
 const cache = apicache.middleware;
 
@@ -11,9 +11,14 @@ const app = express();
 app.use(cors());
 app.use(cache('1 hour'));
 
-app.get('/', async (req, res) => {
-  const data = await TimeSeries.fetchTimeSeries();
-  return res.json(data);
+app.get('/', (req, res) => {
+  fs.readFile('data.json', (err, buffer) => {
+    if (err) {
+      return res.status(500).err({ err });
+    }
+
+    res.json(JSON.parse(buffer));
+  });
 });
 
 app.listen(PORT, () => {
