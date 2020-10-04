@@ -20,7 +20,6 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - name: Run update data
         working-directory: backend
-        run: npm install
-        run: node update-data.js
+        run: npm install && node update-data.js
         env:
           MY_PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
