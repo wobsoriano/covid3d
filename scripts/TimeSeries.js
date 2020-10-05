@@ -70,18 +70,6 @@ class TimeSeries {
     return countryMapper;
   }
 
-  writeToFile(data) {
-    return new Promise(function (resolve, reject) {
-      fs.writeFile('./data.json', data, 'utf-8', function (err) {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(null);
-      });
-    });
-  }
-
   parseCSV(url) {
     return new Promise((resolve, reject) => {
       const rows = [];
