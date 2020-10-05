@@ -1,6 +1,5 @@
 const request = require('request');
 const csv = require('csvtojson');
-const fs = require('fs');
 
 class TimeSeries {
   constructor() {
