@@ -51,7 +51,7 @@ function init() {
              <span>Cases: ${numberWithCommas(c.confirmed)}</span>  <br />
              <span>Deaths: ${numberWithCommas(c.deaths)}</span> <br />
              <span>Recovered: ${numberWithCommas(c.recoveries)}</span> <br />
-             <span>Population: ${d3.format('.3s')(d.POP_EST)}</span>
+             <span>Population: ${d3.format('.3s')(d.POP_EST).replace(/G/,"B")}</span>
           </div>
         </div>
       `;
