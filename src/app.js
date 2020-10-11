@@ -4,6 +4,7 @@ import {
   GLOBE_IMAGE_URL,
   BACKGROUND_IMAGE_URL,
   GEOJSON_URL,
+  GEOJSON_URL2,
   CASES_API,
 } from './constants';
 import * as d3 from 'd3';
@@ -71,6 +72,7 @@ function init() {
 let dates = [];
 let countries = [];
 let featureCollection = [];
+let featureCollection2 = [];
 
 // Play button
 const playButton = document.querySelector('.play-button');
@@ -79,9 +81,26 @@ const slider = document.querySelector('.slider');
 // Slider date
 const sliderDate = document.querySelector('.slider-date');
 
+function polygonFromCenter(center, radius=0.5, num=10) {
+  let coords = [];
+  for (let i = 0; i < num; i++) {
+    const dx = radius*Math.cos(2*Math.PI*i/num);
+    const dy = radius*Math.sin(2*Math.PI*i/num);
+    coords.push([center[0] + dx, center[1] + dy]);
+  }
+  return [coords];
+}
+
 async function getCases() {
   countries = await request(CASES_API);
   featureCollection = (await request(GEOJSON_URL)).features;
+
+  featureCollection2 = (await request(GEOJSON_URL2)).features.map(d => {
+    d.geometry.type = "Polygon";
+    d.geometry.coordinates = polygonFromCenter(d.geometry.coordinates);
+    return d;
+  });
+  featureCollection = featureCollection.concat(featureCollection2);
 
   // world.polygonsData(countriesWithCovid);
   document.querySelector('.title-desc').innerHTML =
