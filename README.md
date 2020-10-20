@@ -28,6 +28,7 @@ npm run build
 
 ## 🛠 Built with
 
+- [snowpack](https://www.snowpack.dev/)
 - [globe.gl](https://github.com/vasturiano/globe.gl)
 - [d3.js](https://d3js.org/)
 
