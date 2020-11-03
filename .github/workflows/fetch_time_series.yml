@@ -3,7 +3,7 @@ name: Fetch time series
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 13 * * *'
+    - cron: '30 5 * * *'
 
 jobs:
   update_readme:
