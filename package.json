@@ -6,15 +6,14 @@
   "scripts": {
     "dev": "snowpack dev",
     "build": "snowpack build",
-    "action": "node ./action.js"
+    "action": "node ./scripts/action.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@snowpack/plugin-optimize": "^0.2.6",
-    "snowpack": "^2.15.0",
-    "action": "node ./scripts/action.js"
+    "snowpack": "^2.15.0"
   },
   "dependencies": {
     "@actions/github": "^4.0.0",
