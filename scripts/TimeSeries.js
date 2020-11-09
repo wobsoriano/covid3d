@@ -1,7 +1,7 @@
 const request = require('request');
 const csv = require('csvtojson');
 
-class TimeSeries {
+class Scraper {
   constructor() {
     this.timeSeriesURL =
       'https://raw.githubusercontent.com/bumbeishvili/covid19-daily-data/master';
@@ -107,4 +107,4 @@ class TimeSeries {
   }
 }
 
-module.exports = new TimeSeries();
+module.exports = Scraper;
