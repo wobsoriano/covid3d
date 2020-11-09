@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '0 */6 * * *' # Every 6 hours. Ref https://crontab.guru/examples.html
+    - cron:  '*/10 * * * *' # Every 10 minutes. Ref https://crontab.guru/examples.html
 name: Scrape Data
 jobs:
   build:
