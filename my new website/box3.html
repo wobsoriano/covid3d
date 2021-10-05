@@ -1,0 +1,369 @@
+
+<html>
+    <body>
+    
+<style>
+@import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
+html, body {
+	height: 100%;
+	margin: 0;
+	background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 0, 0));
+}
+.container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: #fff;
+}
+.lead { font-family: 'Quicksand'; }
+.header-bar {
+	position: relative;
+	width: 50%;
+	min-width: 300px;
+	height: 50px;
+	border: 10px solid transparent;
+	border-top: 10px solid #fffa;
+	border-left: 10px solid #fffa;
+	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25) inset;
+}
+.header-bar::after {
+	content: '';
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	width: 30%;
+	height: 49px;
+	border: 10px solid transparent;
+	border-bottom: 10px solid #fffa;
+	border-right: 10px solid #fffa;
+	transition: 0.3s linear all;
+}
+.header-bar > .logo {
+	position: absolute;
+	top: calc(50% - 20px);
+	left: 10px;
+	transform: translateY(-50%);
+	color: #fffc;
+	font-family: 'Parisienne', cursive;
+	cursor: default;
+	user-select: none;
+}
+.slider-menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+}
+.slider-menu > li {
+	display: inline-flex;
+	padding: 14px;
+	margin-left: 2px;
+	font-family: 'Quicksand', sans-serif;
+	color: rgb(251, 70, 70);
+	cursor: pointer;
+	transition: 0.3s linear all;
+	user-select: none;
+}
+.slider-menu > li:hover {
+	color: rgb(216, 36, 36);
+	box-shadow: 0 50px 5px rgb(0, 0, 0) inset;
+}
+.aeu-signature {
+	position: fixed;
+	top: 5px;
+	left: 50%;
+	transform: translate(-50%);
+	font-size: 15px;
+	line-height: 30px;
+	background-color: #fff;
+	padding: 5px 10px;
+	border-radius: 25px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.aeu-signature { font-family: "Quicksand"; }
+.aeu-signature > img { height: 30px; }
+
+
+
+</style>
+
+
+<div class="container">
+	<p class="lea"lets get started .></p>
+	<div class="header-bar">
+		<h1 class="logo">cuirosity</h1>
+		<ul class="slider-menu">
+			<li>
+		
+                <a href="index.html">Home  </a>
+			</li>
+			
+		</ul>
+	</div>
+
+	
+</div>
+
+
+
+
+
+<style>
+	/* Slideshow container */
+	.slideshow-container {
+	  max-width: 1000px;
+	  position: relative;
+	  margin: auto;
+	}
+	
+	/* Next & previous buttons */
+	.prev, .next {
+	  cursor: pointer;
+	  position: absolute;
+	  top: 50%;
+	  width: auto;
+	  padding: 16px;
+	  margin-top: -22px;
+	  color: white;
+	  font-weight: bold;
+	  font-size: 18px;
+	  transition: 0.6s ease;
+	  border-radius: 0 3px 3px 0;
+	  user-select: none;
+	}
+	
+	/* Position the "next button" to the right */
+	.next {
+	  right: 0;
+	  border-radius: 3px 0 0 3px;
+	}
+	
+	/* On hover, add a black background color with a little bit see-through */
+	.prev:hover, .next:hover {
+	  background-color: rgba(0,0,0,0.8);
+	}
+	
+	/* Caption text */
+	.text {
+	  color: #f5f5f5;
+	  font-size: 20px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  bottom: 8px;
+	  width: 100%;
+	  text-align: center;
+	  font-family:cursive ;
+	}
+	
+	/* Number text (1/3 etc) */
+	.numbertext {
+	  color: #f2f2f2;
+	  font-size: 12px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  top: 0;
+	}
+	
+	/* The dots/bullets/indicators */
+	.dot {
+	  cursor: pointer;
+	  height: 15px;
+	  width: 15px;
+	  margin: 0 2px;
+	  background-color: #bbb;
+	  border-radius: 50%;
+	  display: inline-block;
+	  transition: background-color 0.6s ease;
+	}
+	
+	.active, .dot:hover {
+	  background-color: #717171;
+	}
+	
+	/* Fading animation */
+	.fade {
+	  -webkit-animation-name: fade;
+	  -webkit-animation-duration: 1.5s;
+	  animation-name: fade;
+	  animation-duration: 1.5s;
+	}
+	
+	@-webkit-keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	@keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	/* On smaller screens, decrease text size */
+	@media only screen and (max-width: 300px) {
+	  .prev, .next,.text {font-size: 11px}
+	}
+	</style>
+
+
+
+<div class="slideshow-container">
+	
+	<div class="mySlides fade">
+	  <div class="numbertext">1 / 2</div>
+	  <img src="fight1.jpeg" style="width:100%">
+	  <div class="text"> There is no reason to believe that cold weather can kill new coronavirus. As per WHO, the normal human body temperature ranges between 36.5°C to 37°C irrespective of the external temperature or weather. WHO recommends frequent cleaning of hands either with alcohol-based hand rub or by washing them with soap and water. </div>
+	</div>
+	</div>
+	
+	
+	
+	
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	
+	</div>
+	<br>
+	
+	<div style="text-align:center">
+	  <span class="dot" onclick="currentSlide(1)"></span> 
+	
+	   
+	
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	
+	function plusSlides(n) {
+	  showSlides(slideIndex += n);
+	}
+	
+	function currentSlide(n) {
+	  showSlides(slideIndex = n);
+	}
+	
+	function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > slides.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+		  slides[i].style.display = "none";  
+	  }
+	  for (i = 0; i < dots.length; i++) {
+		  dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";  
+	  dots[slideIndex-1].className += " active";
+	}
+	</script>
+	
+
+
+    
+
+	
+  
+    <div class="is-box-6 is-light-text is-box is-bg-dark">
+        <div class="is-boxes">
+        <div class="is-overlay">
+        <div class="is-overlay-color" style="display: none;"></div>
+        <div class="is-overlay-content"></div>
+        </div>
+        <div class="is-box-centered">
+        <div class="is-container is-builder container-fluid is-content-970" id="contentareaRUcW4VU" style=""><div class="row"><link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <div class="module-border-wrap" style="transform:TranslateX(-60px);">
+        <div class="module">
+        <h3 style=" background: linear-gradient(270deg, #6012D9 0%, #FF0099 100%, #000000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;
+        font-family:Georgia, 'Times New Roman', Times, serif;      font-size:50px;"> About the notion  </h3><br>
+     
+	 <p style=" color: rgb(31, 221, 255); font-size: 15px; font-family: inter; fnt-family: Inter !important;">
+     <h1>
+       <center>Symptoms of Covid-19 </center>
+     </h1>
+	 <h2>
+   
+	 People with COVID-19 have had a wide range of symptoms reported – ranging from mild symptoms to severe illness. Symptoms may appear 2-14 days after exposure to the virus. Anyone can have mild to severe symptoms. People with these symptoms may have COVID-19:<br> 
+	 Fever or  chills <br> <br >
+
+Cough<br>
+Shortness of breath or difficulty breathing<br>
+Fatigue<br>
+Muscle or body aches<br >
+Headache<br >>
+New loss of taste or smell<br>
+Sore throat <br >
+Congestion or runny nose<br >
+Nausea or vomiting<br >
+Diarrhea <br >
+
+<h1 >When to Seek Emergency Medical Attention</h1>
+	 <h2 >
+        
+	 Trouble breathing  <br>
+Persistent pain or pressure in the chest<br>
+New confusion<br>
+Inability to wake or stay awake<br>
+Pale, gray, or blue-colored skin, lips, or nail beds, depending on skin tone<br> <br>
+*This list is not all possible symptoms. Please call your medical provider for any other symptoms that are severe or concerning to you.
+
+Call 911 or call ahead to your local emergency facility: Notify the operator that you are seeking care for someone who has or may have COVID-19.
+</h2>
+	 </h2>
+        </div>
+        </div>
+        <style>
+                .module-border-wrap {
+          width: 100% !important;
+          padding: 1rem;
+          position: relative;
+        left: 70px;
+          background: linear-gradient(270deg, #6012D9 0%, #FF0099 100%, #000000 100%);
+          padding: 15px;
+        border-radius: 50px;
+        }
+        
+        .module {
+          background: rgb(70, 70, 70);
+          color: rgb(255, 255, 255);
+        border-radius: 50px;
+        
+          padding: 2rem;
+        }
+        
+        
+         @media only screen and (max-width: 800px)
+            {
+              .module-border-wrap{
+                  width: 80vw !important;
+              }
+            }
+        </style></div></div>
+
+
+
+</body>
+</html>

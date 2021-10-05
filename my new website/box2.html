@@ -1,0 +1,364 @@
+
+
+<html>
+    <body>
+    
+<style>
+@import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
+html, body {
+	height: 100%;
+	margin: 0;
+	background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 0, 0));
+}
+.container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: #fff;
+}
+.lead { font-family: 'Quicksand'; }
+.header-bar {
+	position: relative;
+	width: 50%;
+	min-width: 300px;
+	height: 50px;
+	border: 10px solid transparent;
+	border-top: 10px solid #fffa;
+	border-left: 10px solid #fffa;
+	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25) inset;
+}
+.header-bar::after {
+	content: '';
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	width: 30%;
+	height: 49px;
+	border: 10px solid transparent;
+	border-bottom: 10px solid #fffa;
+	border-right: 10px solid #fffa;
+	transition: 0.3s linear all;
+}
+.header-bar > .logo {
+	position: absolute;
+	top: calc(50% - 20px);
+	left: 10px;
+	transform: translateY(-50%);
+	color: #fffc;
+	font-family: 'Parisienne', cursive;
+	cursor: default;
+	user-select: none;
+}
+.slider-menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+}
+.slider-menu > li {
+	display: inline-flex;
+	padding: 14px;
+	margin-left: 2px;
+	font-family: 'Quicksand', sans-serif;
+	color: rgb(251, 70, 70);
+	cursor: pointer;
+	transition: 0.3s linear all;
+	user-select: none;
+}
+.slider-menu > li:hover {
+	color: rgb(216, 36, 36);
+	box-shadow: 0 50px 5px rgb(0, 0, 0) inset;
+}
+.aeu-signature {
+	position: fixed;
+	top: 5px;
+	left: 50%;
+	transform: translate(-50%);
+	font-size: 15px;
+	line-height: 30px;
+	background-color: #fff;
+	padding: 5px 10px;
+	border-radius: 25px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.aeu-signature { font-family: "Quicksand"; }
+.aeu-signature > img { height: 30px; }
+
+
+
+</style>
+
+
+<div class="container">
+	<p class="lea"lets get started .></p>
+	<div class="header-bar">
+		<h1 class="logo">cuirosity</h1>
+		<ul class="slider-menu">
+			<li>
+		
+                <a href="index.html">Home  </a>			</li>
+			
+		</ul>
+	</div>
+
+	
+</div>
+
+
+
+
+
+<style>
+	/* Slideshow container */
+	.slideshow-container {
+	  max-width: 1000px;
+	  position: relative;
+	  margin: auto;
+	}
+	
+	/* Next & previous buttons */
+	.prev, .next {
+	  cursor: pointer;
+	  position: absolute;
+	  top: 50%;
+	  width: auto;
+	  padding: 16px;
+	  margin-top: -22px;
+	  color: white;
+	  font-weight: bold;
+	  font-size: 18px;
+	  transition: 0.6s ease;
+	  border-radius: 0 3px 3px 0;
+	  user-select: none;
+	}
+	
+	/* Position the "next button" to the right */
+	.next {
+	  right: 0;
+	  border-radius: 3px 0 0 3px;
+	}
+	
+	/* On hover, add a black background color with a little bit see-through */
+	.prev:hover, .next:hover {
+	  background-color: rgba(0,0,0,0.8);
+	}
+	
+	/* Caption text */
+	.text {
+	  color: #f5f5f5;
+	  font-size: 20px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  bottom: 8px;
+	  width: 100%;
+	  text-align: center;
+	  font-family:cursive ;
+	}
+	
+	/* Number text (1/3 etc) */
+	.numbertext {
+	  color: #f2f2f2;
+	  font-size: 12px;
+	  padding: 8px 12px;
+	  position: absolute;
+	  top: 0;
+	}
+	
+	/* The dots/bullets/indicators */
+	.dot {
+	  cursor: pointer;
+	  height: 15px;
+	  width: 15px;
+	  margin: 0 2px;
+	  background-color: #bbb;
+	  border-radius: 50%;
+	  display: inline-block;
+	  transition: background-color 0.6s ease;
+	}
+	
+	.active, .dot:hover {
+	  background-color: #717171;
+	}
+	
+	/* Fading animation */
+	.fade {
+	  -webkit-animation-name: fade;
+	  -webkit-animation-duration: 1.5s;
+	  animation-name: fade;
+	  animation-duration: 1.5s;
+	}
+	
+	@-webkit-keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	@keyframes fade {
+	  from {opacity: .4} 
+	  to {opacity: 1}
+	}
+	
+	/* On smaller screens, decrease text size */
+	@media only screen and (max-width: 300px) {
+	  .prev, .next,.text {font-size: 11px}
+	}
+	</style>
+
+
+
+	<div class="slideshow-container">
+	
+	<div class="mySlides fade">
+	  <div class="numbertext">1 / 2</div>
+	  <img src="lock.jpeg" style="width:100%">
+	  <div class="text"> This should come as no surprise to anyone, but the impact of implementing restrictions (such as lockdowns) to prevent the spread of COVID-19 is not a simple calculation. As the International Monetary Fund has shown, in some cases there may be a net benefit from lockdowns. In some cases there may be a net detriment. It is complex, and very hard to pin down to a definite good/bad, no matter how much people may want it to be simple. </div>
+	</div>
+	
+	
+	<div class="mySlides fade">
+	  <div class="numbertext">2/2</div>
+	  <img src="immunity.jpeg" style="width:100%">
+	  <div class="text">A very popular myth that consistently gets brought up by denialists is that we are all immune to COVID-19 already because some people’s t-cells react to the disease without them being infected. Rather than explain why this is flawed, I’d recommend you read this thread by Professor Crotty, the immunologist who made the initial findings about t-cells that got everyone excited in the first place.
+
+
+      </div>
+	</div>
+	
+	
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	
+	</div>
+	<br>
+	
+	<div style="text-align:center">
+	  <span class="dot" onclick="currentSlide(1)"></span> 
+	  <span class="dot" onclick="currentSlide(2)"></span> 
+	   
+	
+
+	</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	
+	function plusSlides(n) {
+	  showSlides(slideIndex += n);
+	}
+	
+	function currentSlide(n) {
+	  showSlides(slideIndex = n);
+	}
+	
+	function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > slides.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+		  slides[i].style.display = "none";  
+	  }
+	  for (i = 0; i < dots.length; i++) {
+		  dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";  
+	  dots[slideIndex-1].className += " active";
+	}
+	</script>
+	
+
+
+    
+
+	
+  
+    <div class="is-box-6 is-light-text is-box is-bg-dark">
+        <div class="is-boxes">
+        <div class="is-overlay">
+        <div class="is-overlay-color" style="display: none;"></div>
+        <div class="is-overlay-content"></div>
+        </div>
+        <div class="is-box-centered">
+        <div class="is-container is-builder container-fluid is-content-970" id="contentareaRUcW4VU" style=""><div class="row"><link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <div class="module-border-wrap" style="transform:TranslateX(-60px);">
+        <div class="module">
+			<h3 style=" background: linear-gradient(270deg, #6012D9 0%, #FF0099 100%, #000000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;
+			font-family:Georgia, 'Times New Roman', Times, serif;      font-size:50px;"> About the notion  </h3><br>
+		 
+		 <p style=" color: rgb(31, 221, 255); font-size: 15px; font-family: inter; fnt-family: Inter !important;">
+		 <h1>
+		   <center>history of COVID-19 </center>
+		 </h1>
+		 <h2>
+		 he history of coronaviruses is a reflection of the discovery of the diseases caused by coronaviruses and identification of the viruses. It starts with the first report of a new type of upper-respiratory tract disease among chickens in North Dakota, U.S., in 1931. The causative agent was identified as a virus in 1933. By 1936, the disease and the virus were recognised as unique from other viral disease. They became known as infectious bronchitis virus (IBV), but later officially renamed as Avian coronavirus.
+
+A new brain disease of mice (murine encephalomyelitis) was discovered in 1947 at Harvard Medical School in Boston. The virus causing the disease was called JHM (after Harvard pathologist John Howard Mueller). Three years later a new mouse hepatitis was reported from the National Institute for Medical Research in London. The causative virus was identified as mouse hepatitis virus (MHV).[1][2]
+
+In 1961, a virus was obtained from a school boy in Epsom, England, who was suffering from common cold. The sample designated B814 was confirmed as novel virus in 1965. New common cold viruses (assigned 229E) collected from medical students at the University of Chicago were also reported in 1966. Structural analyses of IBV, MHV, B18 and 229E using transmission electron microscopy revealed that they all belong to the same group of viruses. Making a crucial comparison in 1967, June Almeida and David Tyrrell invented the collective name coronavirus, as all those viruses were characterised by solar corona-like projections (called spikes) on their surfaces.[3]
+
+Other coronaviruses have been discovered from pigs, dogs, cats, rodents, cows, horses, camels, Beluga whales, birds and bats. As of 2020, 39 species are described. Bats are found to be the richest source of different species of coronaviruses. All coronaviruses originated from a common ancestor about 293 million years ago. Zoonotic species such as Severe acute respiratory syndrome-related coronavirus (SARS-CoV), Middle East respiratory syndrome-related coronavirus (MERS-CoV) and Severe acute respiratory syndrome-related coronavirus 2 (SARS-CoV-2), the aetiological agent of the COVID-19 pandemic.
+
+		
+		
+		</h2>
+			
+			
+			</div>
+			</div>
+			<style>
+                .module-border-wrap {
+          width: 100% !important;
+          padding: 1rem;
+          position: relative;
+        left: 70px;
+          background: linear-gradient(270deg, #6012D9 0%, #FF0099 100%, #000000 100%);
+          padding: 15px;
+        border-radius: 50px;
+        }
+        
+        .module {
+          background: rgb(70, 70, 70);
+          color: rgb(255, 255, 255);
+        border-radius: 50px;
+        
+          padding: 2rem;
+        }
+        
+        
+         @media only screen and (max-width: 800px)
+            {
+              .module-border-wrap{
+                  width: 80vw !important;
+              }
+            }
+        </style></div></div>
+
+
+
+</body>
+</html>
